@@ -1,4 +1,8 @@
+using System;
+using System.IO;
+using System.Reflection;
 using BrewCoffee.Services;
+using BrewCoffee.Services.APIProxy;
 using BrewCoffee.Services.Helpers;
 using BrewCoffee.Services.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -7,9 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.IO;
-using System.Reflection;
 
 namespace BrewCoffee
 {
@@ -26,6 +27,8 @@ namespace BrewCoffee
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddOptions();
+            services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -44,9 +47,11 @@ namespace BrewCoffee
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            services.AddHttpClient();
             services.AddSingleton<ICoffeeCounter, CoffeeCounter>();
             services.AddSingleton<IDateTimeHelper, DateTimeHelper>();
             services.AddScoped<ICoffeeBrewingServices, CoffeeBrewingServices>();
+            services.AddHttpClient<IWeatherProxy, WeatherProxy>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
