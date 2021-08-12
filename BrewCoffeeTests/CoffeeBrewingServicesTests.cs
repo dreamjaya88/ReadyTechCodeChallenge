@@ -1,10 +1,10 @@
-﻿using BrewCoffee.Services;
+﻿using System;
+using BrewCoffee.Services;
 using BrewCoffee.Services.Helpers;
 using BrewCoffee.Services.Repository;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using System;
 
 namespace BrewCoffeeTests
 {

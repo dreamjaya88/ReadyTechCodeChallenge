@@ -1,3 +1,4 @@
+using System;
 using BrewCoffee.Controllers;
 using BrewCoffee.DTO;
 using BrewCoffee.Services;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
-using System;
 
 namespace BrewCoffeeTests
 {

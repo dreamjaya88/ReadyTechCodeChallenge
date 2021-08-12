@@ -1,7 +1,7 @@
-﻿using BrewCoffee.Services.Helpers;
+﻿using System;
+using BrewCoffee.Services.Helpers;
 using FluentAssertions;
 using NUnit.Framework;
-using System;
 
 namespace BrewCoffeeTests
 {
